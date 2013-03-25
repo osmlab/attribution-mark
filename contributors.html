@@ -1,0 +1,631 @@
+<!-- TODO set up for translation -->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='utf-8'>
+<title>By OpenStreetMap</title>
+<style>
+* {
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  }
+
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+html, body, h1, h2, p, ul, li {
+  margin:0px;
+  padding:0px;
+  }
+
+h1 {
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: bold;
+  display: inline-block;
+  margin-left: 35px;
+}
+
+h2 {
+  font-size: 25px;
+  line-height: 30px;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+h3 {
+  font-style: italic;
+  font-size: 14px;
+  font-weight: normal;
+  margin: 0; padding: 0;
+}
+
+html, body, .page {
+  height:100%;
+  position:relative; }
+
+body {
+  color:#333;
+  font:normal 14px/1.5 'Helvetica Neue', Helvetica, Arial,sans-serif;
+  background-color:#000;
+  background-position:50% 50%;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-attachment: fixed;
+  }
+
+small {
+  font-size:12px;
+  color: #999;
+  }
+
+p { margin-bottom: 20px;}
+p:last-child { margin-bottom: 0;}
+
+em { font-style: italic;}
+
+a {
+  color: blue;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+body.photo-0 { background-image:url(0.jpg) }
+body.photo-1 { background-image:url(1.jpg); }
+body.photo-2 { background-image:url(2.jpg); }
+body.photo-3 { background-image:url(3.jpg); }
+body.photo-4 { background-image:url(4.jpg); }
+body.photo-5 { background-image:url(5.jpg); }
+body.photo-0 .photo-0 { display:block; }
+body.photo-1 .photo-1 { display:block; }
+body.photo-2 .photo-2 { display:block; }
+body.photo-3 .photo-3 { display:block; }
+body.photo-4 .photo-4 { display:block; }
+body.photo-5 .photo-5 { display:block; }
+
+.caption {
+  max-width:200px;
+  float:right;
+  font:italic 14px/20px 'Times New Roman',serif;
+  position:fixed;
+  text-align:right;
+  right: 20px;
+  bottom: 60px;
+  text-shadow:#000 0px 1px 5px;
+  color:#fff;
+  display:none;
+  }
+
+.caption a,
+.attr strong {
+  color:white;
+  text-decoration:none;
+  line-height: 1.2;
+  }
+
+.caption a { white-space:nowrap; }
+
+a.next {
+  display:block;
+  position:absolute;
+  right:10px;
+  bottom:10px;
+  width:40px;
+  height:40px;
+  border-radius:5px;
+  text-indent:-9999px;
+  overflow:hidden;
+  background:url(sprite.png) -120px 0px no-repeat;
+  background-color:#000;
+  background-color:rgba(0,0,0,0.5);
+  position: fixed;
+  }
+
+#skinny-top-bar {
+  height: 30px;
+  background: white;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  border-bottom: 1px solid #ddd;
+  z-index: 10;
+}
+
+a.logo {
+  color: #333;
+  display: block;}
+a.logo:hover { text-decoration: none;}
+
+.secondary-actions li {
+  float: left;
+  list-style: none;
+  margin-left: 10px;
+  padding-left: 10px;
+  border-left: 1px solid #ddd;
+}
+
+.secondary-actions li:first-child {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.osmlogo {
+  display: block;
+  height: 30px;
+  width: 20px;
+  margin-right: 5px;
+  background: url(sprite.png) -250px -11px no-repeat;
+  margin-left: 10px;
+  position: absolute;
+  top: 5px;
+}
+
+#greeting {
+  position: absolute;
+  right: 10px;
+  top: 4px;
+}
+
+#content-heading .button.vendor:after {
+  content:'';
+  display:inline-block;
+  vertical-align:middle;
+  margin-top:-2px;
+  width:20px; height:20px;
+  }
+
+#content-heading .button.vendor:after { background:url(sprite.png) -290px -10px no-repeat; margin-left:5px; }
+
+.text {
+  background: white;
+  position:relative;
+  padding: 30px 20px;
+  margin-bottom: 40px;
+  z-index: 1;
+  }
+
+#content-heading .text {
+  padding:40px;
+  background:white;
+  border-bottom:1px solid #ddd;
+  }
+
+#header .text {
+  position:absolute;
+  margin-left: 25%;
+  width: 50%;
+  min-width: 320px;
+  max-width: 640px;
+  bottom:0;
+  background: #333;
+  background: rgba(0,0,0,.8);
+  z-index: 2;
+  }
+
+.attr {
+  position:relative;
+  padding: 170px 20px 20px 20px;
+}
+
+.attr strong {
+  display:block;
+  font-size:32px;
+  }
+
+.attr strong span { color:#76c551; }
+
+.attr .user-image {
+  position:absolute;
+  top:0px; right:240px; left:0px;
+  height:150px;
+  background-position:0 50%;
+  background-repeat:no-repeat;
+  background-image:url(osm.png);
+  }
+
+.attr .byosm {
+  position:absolute;
+  top:0px;
+  right:0px;
+  z-index:1;
+  width:240px;
+  height:150px;
+  padding:20px 20px 20px 40px;
+  font:bold 24px/25px Helvetica,Arial,sans-serif;
+  letter-spacing:-1px;
+  white-space:nowrap;
+  color:#fff;
+  background: #76c551
+  }
+
+.attr .byosm span {
+  display:inline-block;
+  width:25px; margin-left:-25px;
+  }
+
+.attr .byosm .mark {
+  position: relative;
+  width: 56px;
+  margin-bottom: 10px;
+  height: 56px;
+  background: url(sprite.png) -50px 0px no-repeat;
+  }
+
+#content-heading { margin-top:-40px; }
+
+.text p > strong { padding-left:0px; }
+
+.icon {
+  width:30px; height:30px;
+  position:relative;
+  float: left;
+  margin-right: 10px;
+  background:40px 40px url(sprite.png) no-repeat;
+  }
+
+.icon.local { background-position:0px 0px; }
+.icon.community { background-position:0px -40px; }
+.icon.open { background-position:0px -80px; }
+.icon.contributors { background-position:0px -120px; }
+.icon.infringement { background-position:0px -160px; }
+
+#content-body {
+  display: block;
+  position: relative;
+  color: #333;
+  width: 50%;
+  margin-left: 25%;
+  min-width: 320px;
+  max-width: 640px;
+  padding-bottom: 40px;
+}
+
+#content-body .section {
+  margin-bottom: 30px;
+}
+#content-body .section:last-child { margin-bottom: 0;}
+
+#content-body .section ul li { margin-left: 20px;}
+
+a.button,
+a.builder {
+  display:inline-block;
+  text-decoration:none;
+  background:#7092ff;
+  padding:5px 15px;
+  border-radius:5px;
+  color:#fff;
+  font-weight: bold;
+  }
+
+a.button {
+  height: 40px;
+  margin: auto;
+  display: block;
+  left: 0;
+  right: 0;
+  width: 120px;
+  text-align: center;
+  line-height: 30px;
+  }
+
+a.button:hover,
+a.builder:hover {
+  background: blue;
+  }
+
+a.builder em {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  width: 27px;
+  height: 30px;
+  text-indent: -9999px;
+  overflow: hidden;
+  background: url(sprite.png) -166px -5px no-repeat;
+  }
+
+div.builder {
+  background: #333;
+  background: rgba(0, 0, 0, .8);
+  display:none;
+  position:fixed; left:25%; top:0px;
+  margin:60px 0px 0px 0;
+  width:50%;
+  padding:0 20px 20px 20px;
+  z-index:2;
+  min-width: 320px;
+  max-width: 640px;
+  }
+
+div.builder a.close {
+  position:absolute; right:-20px; top:-20px; z-index:100;
+  display:block;
+  width:40px; height:40px;
+  text-indent:-9999px;
+  overflow:hidden;
+  background:url(sprite.png) -200px 0px no-repeat;
+  }
+
+div.builder .button {
+  display:block;
+  width:200px;
+  margin-left:0;
+  }
+
+div.builder .attr strong { margin-bottom: 0;}
+div.builder p { color: white;}
+div.builder a.customized { display:none; }
+div.builder a.skip { display:block; color: white; }
+div.customized a.skip { display:none; }
+div.customized a.customized { display:block; }
+
+div.builder .form { display:block; }
+div.builder.widget .form { display:none; }
+div.builder .widget { display:none; }
+div.builder.widget .widget { display:block; }
+
+.img {
+  margin: 20px 0px 20px 0px;
+  height: 160px;
+  background: url(headers.png) right top no-repeat;
+  border-radius: 3px;
+  }
+
+div.builder .attr {
+  border-bottom:2px dashed #333;
+  border-radius:3px;
+  padding: 160px 20px 20px 20px;
+  margin:0px -20px 20px;
+  }
+
+input[type='text'] {
+  border:0px;
+  background:#000;
+  color:#fff;
+  display:inline-block;
+  padding:5px;
+  margin:0px 0px 10px;
+  width:100%;
+  font:14px/25px Arial,sans-serif;
+  border-radius: 4px;
+  }
+
+body.builder div.builder { display:block; }
+
+body.builder:after {
+  content:'';
+  position:fixed;
+  z-index:1;
+  left:0px; right:0px; bottom:0px; top:0px;
+  background:rgba(0,0,0,0.6);
+  }
+
+@media
+  screen and (max-width:640px) {
+  a.builder, a.next, div.caption { display:none !important; }
+  #content-body, #header .text { width: 100%; margin: 0;}
+  }
+@media
+  screen and (-webkit-min-device-pixel-ratio:2),
+  screen and (min-device-pixel-ratio:2) {
+  .icon,
+  a.next,
+  #content-heading .button.vendor:after,
+  .attr .byosm .mark,
+  div.builder a.close {
+    background-image:url(sprite@2x.png);
+    background-size:320px 120px;
+    }
+  }
+</style>
+<script type='text/javascript'>
+
+// Use byosm namespace.
+var byosm = {};
+byosm.hash = '';
+byosm.num = Math.floor(Math.random() * 6);
+byosm.attr = function(data) {
+  var data = data || this;
+  var output = "<div class='byosm'><div class='mark'></div><span>&copy;</span>OpenStreetMap<br>contributors</div>";
+  if (data && data.image) {
+    output += "<div class='user-image' style='background-image:url(\""+data.image+"\")'></div>";
+  } else {
+    output += "<div class='user-image'></div>";
+  }
+  if (data && data.name) {
+    output += "<strong><span class='user-name'>"+data.name+"</span> uses maps powered by data from <span>OpenStreetMap</span></strong>";
+  } else {
+    output += "<strong><span class='user-name'>OpenStreetMap</span> powers map data on hundreds of web and mobile apps</strong>";
+  }
+  return output;
+};
+byosm.update = function() {
+  var data = {
+    name: document.getElementById('field-user-name').value,
+    image: document.getElementById('field-user-image').value
+  };
+  document.getElementById('preview').innerHTML = byosm.attr(data);
+  document.getElementById('builder').className = 'builder ' + ((data.name||data.image) ? 'customized' : '');
+  return false;
+};
+byosm.create = function() {
+  var query = [];
+  if (document.getElementById('field-user-name').value)
+    query.push('name='+document.getElementById('field-user-name').value);
+  if (document.getElementById('field-user-image').value)
+    query.push('image='+document.getElementById('field-user-image').value);
+  var url = 'http://www.openstreetmap.org/contributors.html' + (query.length ? '?' + query.join('&') : '');
+  var attr = "<a target='_blank' href='"+url+"' style='background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAwCAMAAACFQszZAAAASFBMVEX///////8AAAC7u7vt7e0AAAAAAACenp4AAAAAAAD5+fkAAAAAAAA8PDyBgYFkZGQRERH09PQAAAD9/f3Q0NAAAAAAAADl5eVHEuEiAAAAGHRSTlMAfT9WbTIrTx8HeAkgQ0tIL3M7fF4+FGf7jOcLAAACLUlEQVRIx+WW23aDIBBFKygGFBHM6P//aWfwGsCIafvUeclKFu7M5XDGr6//FHIUVeWgEmKUP8A0wjEARgHgRPNpNoIFIT7KanT0rOGTVcpO3NA3N97nPKikrhyKJQbbUYWPTzh6Kl5i0oi6SRqRY1QRhML64FZ1EvtjikQgyd3pOM5LqxRo0AzEDf1gL/b+8G38+NuEH82dhLoEx1eLsxN3OmRDjinn7xYY5HZpZGCifMq1SyZ/cAIYH8K6jqWK/Batrd44fJdlPqjaW5QAWcaqTBCqmkQ0dPwwsY2kUN2ZIOdBTw0vHsJ3kLtV2p7NkthCKvNLq+ZmHx4/kp75IHF8nBdFCM2+beghs4XQ410RkNCUcgUpYRUy301gJZUpI5HNY2xkUtprIs/g8vIOIj1K4ecL8W5o4Ggj4bWDJryaPW4I3A99vBvwLxLGtpBEyDFK4dUcBmui7qGRgBnSpKBD0h082UTtI/PvVMJoIw8RPR2z2juo7SOJPWjyQU6qixeb9JLwHC/i2PRi0tAl1lrDJuW1xbT3GIgNPSQlOXjKFiVtBKat95iEWNsXkue0CVu2ZU8Y7UkquYmPpBMOlUbDnKhNSCrTu2onnXFw+lwhyRYziZ9smI10xkHP6RHibyaR9JkxtPP9P+fgDd8EiaTzFwNPesOhdterzup3BtPOF6x9d2Ih1e9fntoLDmmpzuB4Unt1oiZOe+WY7fUJVmdwcuI662zSL3H+KL4Bvxgab1k+DMoAAAAASUVORK5CYII=) no-repeat; background-size:36px 24px;background-position:-48px -24px\\0/;width:24px;height:24px;display:block;z-index:1000;bottom:2px;right:2px;position:absolute;'></a>";
+  document.getElementById('builder').className = 'builder widget';
+  document.getElementById('field-widget').value = attr;
+  return false;
+};
+byosm.builder = function() {
+  document.body.className += " builder";
+  return false;
+};
+byosm.cancel = function() {
+  document.body.className = document.body.className.replace('builder','');
+  document.getElementById('builder').className = 'builder';
+  return false;
+};
+byosm.next = function() {
+  byosm.num=(byosm.num+1)%6;
+  document.body.className="photo-"+byosm.num;
+  window.location.hash=byosm.num;
+  return false;
+};
+byosm.getmaps = function() {
+  if (!byosm.vendor || !byosm.vendorURL) return '';
+  return "<a class='button vendor' href='"+byosm.vendorURL+"'>Maps from "+byosm.vendor+"</a><small>Get maps powered by OpenStreetMap from <strong>"+byosm.vendor+"</strong></small>";
+};
+
+// Parse querystring.
+if (window.location.search) {
+  var n = window.location.search.match(/[?|&]name=([^&]+)/);
+  var i = window.location.search.match(/[?|&]image=([^&]+)/);
+  var v = window.location.search.match(/[?|&]vendor=([^&]+)/);
+  var vu = window.location.search.match(/[?|&]vendorURL=([^&]+)/);
+  if (n) {
+    byosm.name = decodeURIComponent(n[1]);
+    if (i) byosm.image = decodeURIComponent(i[1].indexOf('://') === -1 ? 'http://'+i[1] : i[1]);
+  }
+  if (v && vu) {
+    byosm.vendor = decodeURIComponent(v[1]);
+    byosm.vendorURL = decodeURIComponent(vu[1].indexOf('://') === -1 ? 'http://'+vu[1] : vu[1]);
+  }
+}
+
+// Parse hash.
+if (window.location.hash) {
+  var h = window.location.hash.match(/#(.*)/);
+  if (h) byosm.hash = h[1];
+  if (!isNaN(parseInt(h[1],10))) byosm.num = h[1];
+}
+</script>
+</head>
+<body class='photo-0'>
+
+<!-- Skinny header -->
+<div id='skinny-top-bar'>
+  <a href='http://www.openstreetmap.org/' class='logo'><span class='osmlogo'></span><h1>OpenStreetMap</h1></a>
+  <ul class="secondary-actions" id="greeting">
+    <li><a href="/login?referer=%2F" id="loginanchor" title="Log in with an existing account">log in</a></li>
+    <li><a href="/user/new" id="registeranchor" title="Create an account for editing">sign up</a></li>
+  </ul>
+</div>
+
+<!-- Attribution header -->
+<div id='header' class='page'>
+<div class='attr text w s'>
+  <script type='text/javascript'>document.write(byosm.attr());</script>
+</div>
+</div>
+
+<!-- Legal section -->
+<div class='legal' id='content-body'>
+  <div class='text'>
+    <div class='section'>
+      <p><strong>OSM is built by a community of local mappers that keeps data about roads, cafés, subway stations, and much more up to date every day.</strong></p>
+      <h2><div class='icon local'></div>Local Knowledge</h2>
+      <p>OpenStreetMap emphasizes local knowledge. Contributors make use of aerial imagery, GPS devices, and low-tech field maps to verify that OSM is up to date and accurate.</p>
+    </div>
+    <div class='section'>
+      <h2><div class='icon community'></div>Community Driven</h2>
+      <p>From the engineers that tune OSM's servers to the Humanitarian OSM Team that maps disaster-affected areas, OSM's community is diverse, passionate, and growing every day.</p>
+    </div>
+    <div class='section' id='open-data'>
+      <h2><div class='icon open'></div>Open data</h2>
+      <p><strong>OpenStreetMap is open data, licensed under the Open Data Commons Open Database License (ODbL).</strong></p>
+      <p>You are free to copy, distribute, transmit and adapt our data, as long as you credit OpenStreetMap and its contributors. If you alter or build upon our data, you may distribute the result only under the same licence. The full legal code explains your rights and responsibilities. The cartography in our map tiles, and our documentation, are licensed under the Creative Commons Attribution-ShareAlike 2.0 license (CC-BY-SA).</p>
+      <p>Although OpenStreetMap is open data, we cannot provide a free-of-charge map API for third-party developers. See our API Usage Policy, Tile Usage Policy and Nominatim Usage Policy.</p>
+      <p><strong>Crediting OSM</strong></p>
+      <p>We require that you use the <span></span> by-osm symbol on all maps derived from OSM data. The text “© OpenStreetMap contributors” can be used in addition or as an alternative to the mark.</p>
+      <div class='buttons'>
+        <script type='text/javascript'>document.write(byosm.getmaps());</script>
+        <a class='builder' href='#builder' onclick='return byosm.builder()'>Add <em>byosm</em> to your map</a>
+      </div>
+    </div>
+    <div class='section' id='contributors'>
+      <h2><div class='icon contributors'></div>Our contributors</h2>
+      <p>Our contributors are thousands of individuals. We also include openly-licensed data from national mapping agencies and other sources, among them:</p>
+      <ul id="contributors">
+        <li><strong>Austria</strong>: Contains data from <a href="http://data.wien.gv.at/">Stadt Wien</a> (under <a href="http://creativecommons.org/licenses/by/3.0/at/deed.de">CC BY</a>), <a href="http://www.vorarlberg.at/vorarlberg/bauen_wohnen/bauen/vermessung_geoinformation/weitereinformationen/services/wmsdienste.htm">Land Vorarlberg</a> and Land Tirol (under <a href="http://www.tirol.gv.at/applikationen/e-government/data/nutzungsbedingungen/">CC-BY AT with amendments</a>).
+        </li>
+        <li><strong>Canada</strong>: Contains data from GeoBase®, GeoGratis (© Department of Natural Resources Canada), CanVec (© Department of Natural Resources Canada), and StatCan (Geography Division, Statistics Canada).</li>
+        <li><strong>France</strong>: Contains data sourced from Direction Générale des Impôts.</li>
+        <li><strong>Netherlands</strong>: Contains © AND data, 2007 (<a href="http://www.and.com">www.and.com</a>)</li>
+        <li><strong>New Zealand</strong>: Contains data sourced from Land Information New Zealand. Crown Copyright reserved.</li>
+        <li><strong>South Africa</strong>: Contains data sourced from <a href="http://www.ngi.gov.za/">Chief Directorate: National Geo-Spatial Information</a>, State copyright reserved.</li>
+        <li><strong>United Kingdom</strong>: Contains Ordnance Survey data © Crown copyright and database right 2010-12.</li>
+      </ul>
+    </div>
+    <div class='section' id='copyright-infringement'>
+      <h2><div class='icon infringement'></div>Copyright infringement</h2>
+      <p>OSM contributors are reminded never to add data from any copyrighted sources (e.g. Google Maps or printed maps) without explicit permission from the copyright holders.</p>
+      <p>If you believe that copyrighted material has been inappropriately added to the OpenStreetMap database or this site, please refer to our <a href="http://www.osmfoundation.org/wiki/License/Takedown_procedure">takedown procedure</a> or file directly at our <a href="http://dmca.openstreetmap.org/">on-line filing page</a>.</p>
+    </div>
+  </div>
+<a href='https://www.openstreetmap.org/login' class='button osm'>Join OSM</a>
+
+</div>
+
+<!-- Photo captions -->
+<div class='caption photo-0'>
+<a href='https://twitter.com/mikel'>@mikel</a> working on <a href='http://mapkibera.org/'>Map Kibera</a>, a project to map the largest slum in Nairobi, Kenya. <a href='http://www.flickr.com/photos/watato/4564778295'>&copy; watato 2010</a>
+</div>
+<div class='caption photo-1'>
+<a href='https://twitter.com/lxbarth'>@lxbarth</a> and <a href='https://twitter.com/limareis'>@limareis</a> survey Brasilia with walking papers. <a href='http://www.flickr.com/photos/mapbox/7104560119'>&copy; mapbox 2012</a>
+</div>
+<div class='caption photo-2'>
+@TODO caption (<a href='http://www.flickr.com/photos/oddwick/4775001075'>source</a>)
+</div>
+<div class='caption photo-3'>
+@TODO caption (<a href='http://www.flickr.com/photos/28698126@N02/3012439281'>source</a>)
+</div>
+<div class='caption photo-4'>
+@TODO caption (<a href='http://www.flickr.com/photos/louis_liu/4875155429/'>source</a>)
+</div>
+<div class='caption photo-5'>
+@TODO caption (<a href='http://www.flickr.com/photos/kachkaev/5793019627'>source</a>)
+</div>
+<a class='next' href='#' onclick='return byosm.next()'>Next</a>
+
+<!-- Attribution widget builder -->
+<div class='builder' id='builder'>
+<a class='close' href='#' onclick='return byosm.cancel()'>Close</a>
+<div class='form'>
+  <div class='attr' id='preview'><script type='text/javascript'>document.write(byosm.attr({}));</script></div>
+  <input onkeyup='byosm.update()' id='field-user-name' type='text' placeholder='Your name'/>
+  <input onkeyup='byosm.update()' id='field-user-image' type='text' placeholder='Image URL'/>
+  <a class='button skip' href='#create' onclick='return byosm.create()'>Skip customization</a>
+  <a class='button customized' href='#create' onclick='return byosm.create()'>Create attribution</a>
+</div>
+<div class='widget'>
+  <div class='img widget'></div>
+  <input id='field-widget' type='text' onclick='(event.target||event.srcElement).select()' />
+  <p>Copy + paste the code above into your map element.</p>
+</div>
+</div>
+
+<script type='text/javascript'>
+document.body.className = 'photo-'+byosm.num;
+if (byosm.hash === 'builder') byosm.builder();
+</script>
+
+</body>
+</html>
