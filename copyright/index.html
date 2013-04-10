@@ -434,9 +434,13 @@ body.builder:after {
   }
 
 @media
-  screen and (max-width:640px) {
+  screen and (max-width:720px) {
   a.builder, a.next, div.caption { display:none !important; }
-  #content-body, #header .text { width: 100%; margin: 0;}
+  #content-body, #header .text { 
+    width: 100%; 
+    max-width: none; 
+    margin: 0;
+    }
   }
 @media
   screen and (-webkit-min-device-pixel-ratio:2),
