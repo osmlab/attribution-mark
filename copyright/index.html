@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset='utf-8'>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 <title>By OpenStreetMap</title>
 <style>
 * {
@@ -64,7 +65,7 @@ body {
 
 small {
   font-size:12px;
-  color: #999;
+  color: white;
   }
 
 p { margin-bottom: 20px;}
@@ -179,20 +180,38 @@ a.logo:hover { text-decoration: none;}
   top: 4px;
 }
 
-#content-heading .button.vendor:after {
+.buttons {
+  text-align: center;
+}
+
+.buttons .button {
+  width: 50%;
+  padding: 20px;
+}
+
+.button.vendor {
+  background: #333;
+  padding: 5px 15px;
+  margin: 20px auto 10px auto;
+}
+.button.vendor:hover {
+  background: #222;
+}
+
+.button.vendor:after {
   content:'';
   display:inline-block;
   vertical-align:middle;
   margin-top:-2px;
   width:20px; height:20px;
+  background:url(sprite.png) -290px -10px no-repeat;
+  margin-left:5px;
   }
-
-#content-heading .button.vendor:after { background:url(sprite.png) -290px -10px no-repeat; margin-left:5px; }
 
 .text {
   background: white;
   position:relative;
-  padding: 30px 20px;
+  padding: 40px;
   margin-bottom: 40px;
   z-index: 1;
   }
@@ -205,7 +224,8 @@ a.logo:hover { text-decoration: none;}
 
 #header .text {
   position:absolute;
-  margin-left: 25%;
+  margin: auto;
+  left: 0; right: 0;
   width: 50%;
   min-width: 320px;
   max-width: 640px;
@@ -222,7 +242,7 @@ a.logo:hover { text-decoration: none;}
 
 .attr strong {
   display:block;
-  font-size:32px;
+  font-size:25px;
   }
 
 .attr strong span { color:#76c551; }
@@ -234,6 +254,8 @@ a.logo:hover { text-decoration: none;}
   background-position:0 50%;
   background-repeat:no-repeat;
   background-image:url(osm.png);
+  background-size: cover;
+  background-color: #76c551;
   }
 
 .attr .byosm {
@@ -285,9 +307,9 @@ a.logo:hover { text-decoration: none;}
 #content-body {
   display: block;
   position: relative;
+  margin: auto;
   color: #333;
   width: 50%;
-  margin-left: 25%;
   min-width: 320px;
   max-width: 640px;
   padding-bottom: 40px;
@@ -312,7 +334,6 @@ a.builder {
   }
 
 a.button {
-  height: 40px;
   margin: auto;
   display: block;
   left: 0;
@@ -342,9 +363,9 @@ div.builder {
   background: #333;
   background: rgba(0, 0, 0, .8);
   display:none;
-  position:fixed; left:25%; top:0px;
+  position:fixed; left:16.6666%; top:0px;
   margin:60px 0px 0px 0;
-  width:50%;
+  width:66.6666%;
   padding:0 20px 20px 20px;
   z-index:2;
   min-width: 320px;
@@ -415,9 +436,13 @@ body.builder:after {
   }
 
 @media
-  screen and (max-width:640px) {
+  screen and (max-width:720px) {
   a.builder, a.next, div.caption { display:none !important; }
-  #content-body, #header .text { width: 100%; margin: 0;}
+  #content-body, #header .text {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    }
   }
 @media
   screen and (-webkit-min-device-pixel-ratio:2),
@@ -428,7 +453,7 @@ body.builder:after {
   .attr .byosm .mark,
   div.builder a.close {
     background-image:url(sprite@2x.png);
-    background-size:320px 120px;
+    background-size:320px 200px;
     }
   }
 </style>
@@ -468,7 +493,7 @@ byosm.create = function() {
     query.push('name='+document.getElementById('field-user-name').value);
   if (document.getElementById('field-user-image').value)
     query.push('image='+document.getElementById('field-user-image').value);
-  var url = 'http://www.openstreetmap.org/contributors.html' + (query.length ? '?' + query.join('&') : '');
+  var url = 'http://www.openstreetmap.org/copyright.html' + (query.length ? '?' + query.join('&') : '');
   var attr = "<a target='_blank' href='"+url+"' style='background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAAAwCAMAAACFQszZAAAASFBMVEX///////8AAAC7u7vt7e0AAAAAAACenp4AAAAAAAD5+fkAAAAAAAA8PDyBgYFkZGQRERH09PQAAAD9/f3Q0NAAAAAAAADl5eVHEuEiAAAAGHRSTlMAfT9WbTIrTx8HeAkgQ0tIL3M7fF4+FGf7jOcLAAACLUlEQVRIx+WW23aDIBBFKygGFBHM6P//aWfwGsCIafvUeclKFu7M5XDGr6//FHIUVeWgEmKUP8A0wjEARgHgRPNpNoIFIT7KanT0rOGTVcpO3NA3N97nPKikrhyKJQbbUYWPTzh6Kl5i0oi6SRqRY1QRhML64FZ1EvtjikQgyd3pOM5LqxRo0AzEDf1gL/b+8G38+NuEH82dhLoEx1eLsxN3OmRDjinn7xYY5HZpZGCifMq1SyZ/cAIYH8K6jqWK/Batrd44fJdlPqjaW5QAWcaqTBCqmkQ0dPwwsY2kUN2ZIOdBTw0vHsJ3kLtV2p7NkthCKvNLq+ZmHx4/kp75IHF8nBdFCM2+beghs4XQ410RkNCUcgUpYRUy301gJZUpI5HNY2xkUtprIs/g8vIOIj1K4ecL8W5o4Ggj4bWDJryaPW4I3A99vBvwLxLGtpBEyDFK4dUcBmui7qGRgBnSpKBD0h082UTtI/PvVMJoIw8RPR2z2juo7SOJPWjyQU6qixeb9JLwHC/i2PRi0tAl1lrDJuW1xbT3GIgNPSQlOXjKFiVtBKat95iEWNsXkue0CVu2ZU8Y7UkquYmPpBMOlUbDnKhNSCrTu2onnXFw+lwhyRYziZ9smI10xkHP6RHibyaR9JkxtPP9P+fgDd8EiaTzFwNPesOhdterzup3BtPOF6x9d2Ih1e9fntoLDmmpzuB4Unt1oiZOe+WY7fUJVmdwcuI662zSL3H+KL4Bvxgab1k+DMoAAAAASUVORK5CYII=) no-repeat; background-size:36px 24px;background-position:-48px -24px\\0/;width:24px;height:24px;display:block;z-index:1000;bottom:2px;right:2px;position:absolute;'></a>";
   document.getElementById('builder').className = 'builder widget';
   document.getElementById('field-widget').value = attr;
@@ -556,10 +581,7 @@ if (window.location.hash) {
       <p><strong>Crediting OSM</strong></p>
       <p>We require that you use the <span></span> by-osm symbol to credit OpenStreetMap data. Where not possible, you may use “© OpenStreetMap contributors” instead.</p>
       <p>
-        <div class='buttons'>
-          <script type='text/javascript'>document.write(byosm.getmaps());</script>
-          <a class='builder' href='#builder' onclick='return byosm.builder()'>Add <em>byosm</em> to your map</a>
-        </div>
+        <a class='builder' href='#builder' onclick='return byosm.builder()'>Add <em>byosm</em> to your map</a>
       </p>
       <p>You must also make it clear that the data is available under the Open Database License, and if using our map tiles, that the cartography is licensed as CC-BY-SA. You may do this by linking to this copyright page. Alternatively, and as a requirement if you are distributing OSM in a data form, you can name and link directly to the license(s). In media where links are not possible (e.g. printed works), we suggest you direct your readers to openstreetmap.org (perhaps by expanding 'OpenStreetMap' to this full address), to opendatacommons.org, and if relevant, to creativecommons.org.</p>
     </div>
@@ -583,8 +605,10 @@ if (window.location.hash) {
       <p>If you believe that copyrighted material has been inappropriately added to the OpenStreetMap database or this site, please refer to our <a href="http://www.osmfoundation.org/wiki/License/Takedown_procedure">takedown procedure</a> or file directly at our <a href="http://dmca.openstreetmap.org/">on-line filing page</a>.</p>
     </div>
   </div>
-<a href='https://www.openstreetmap.org/login' class='button osm'>Join OSM</a>
-
+  <div class='buttons'>
+    <a href='https://www.openstreetmap.org/login' class='button osm'>Join OSM</a>
+    <script type='text/javascript'>document.write(byosm.getmaps());</script>
+  </div>
 </div>
 
 <!-- Photo captions -->
