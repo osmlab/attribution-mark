@@ -1,3 +1,3 @@
 # OpenStreetMap Attribution Mark
 
-TODO: Link to proposal on Wiki.
+RFC: http://lists.openstreetmap.org/pipermail/talk/2013-April/066802.html
